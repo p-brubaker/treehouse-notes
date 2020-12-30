@@ -321,7 +321,7 @@ To set up a repository as a remote (linked) repository, use
 * [Anchor Tags](#anchor-tags)
 * [HTML Lists](#html-lists)
 * [Select and Style by Element](#Select-and-style-by-element)
-* [Select and Style by Class](#)
+* [Select and Style by Class](#select-and-style-by-class)
 * [Outside Resources](#intro-to-html-and-css-outside-resources)
 
 #### The basic structure of a web page
@@ -423,10 +423,21 @@ CSS classes are developer-defined labels used to apply the same styling rule to 
 
 ### HTML Basics
 
-*contents*
+*contents:*
 
 * [What is HTML?](#what-is-html)
 * [Global structure of an HTML Document](#global-structure-of-an-html-document)
+* [Paragraphs and Headings](#paragraphs-and-headings)
+* [Creating Lists](#creating-lists)
+* [Creating Links](#creating-links)
+* [Semantic HTML](#semantic-html)
+* [Sectioning Content With Article, Nav, and Aside](#sectioning-content-with-article-nav-and-aside)
+* [Grouping Content with \<main\> and \<div\>](#grouping-content-with-main-and-div)
+* [Adding and Captioning Images](#adding-and-captioning-images)
+* [Creating Breaks in Content](#creating-breaks-in-content)
+* [Add Meaning to Words With Text Level Elements](#add-meaning-to-words-with-text-level-elements)
+* [Linking to Sections of a Webpage](#linking-to-sections-of-a-webpage)
+* [Link to Email](#link-to-email)
 * [HTML Basics Outside Resources](#html-basics-outside-resources)
 
 #### What is HTML?
@@ -435,11 +446,124 @@ HTML stands for **Hypertext Markup Language**. Text that can be displayed on a d
 
 **Markup** is the coded text written by the developer that instructs the browser on  what to display on a Webpage.
 
-In Short, HTML is the language of the Web.
+In short, HTML is the language of the Web.
 
 #### Global Structure of an HTML Document
 
-Every HTML document must begin with a doctype declaration, so the browser knows which version of HTML the page is using. After that, the `<html></html>` tags enclose everything that is HTML code. The `<head></head>` and `<body></body>` tags are the remaining two mandatory tags. The head tags enclose special instructions for the browser, such as a title to be displayed in the browser's title bar, while any content to be displayed on the Webpage is **nested** within the body tags.
+Every HTML document must begin with a doctype declaration, so the browser knows which version of HTML the page is using. After that, the `<html></html>` tags enclose everything that is HTML code. The html element is known as the **root element**. The `<head></head>` and `<body></body>` elements are the remaining two mandatory elements. The [head][4] tags enclose special instructions for the browser, such as a title to be displayed in the browser's title bar, while any content to be displayed on the Webpage is **nested** within the body tags.
+
+#### Paragraphs and Headings
+
+Heading tags are specified with an h followed by a number 1 through 6, with 1 being the largest heading and 6 being the smallest. Paragraphs are specified with the letter p.
+
+```HTML
+  <h1>The Largest Heading goes here</h1>
+  <p>Some text goes here here</p>
+```
+
+#### Creating lists
+
+There are three types of HTML lists, **ordered lists**, **unordered lists**, and **description lists**. List items are placed within the list item tag. Unordered list are displayed with bullet points, ordered lists with their corresponding numbers, and description lists with the term in bold and the description indented below.
+
+```HTML
+Ordered List:
+<ol>
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+</ol>
+
+Unordered list:
+<ul>
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+</ul>
+
+Descrption List:
+<dl>
+  <dt>Item 1</dt>
+  <dd>Description of item 1</dd>
+
+  <dt>Item 2</dt>
+  <dd>Description of item 2</dd>
+</dl>
+```
+
+#### Creating links
+
+Links are created with **anchor tags**, denoted by the letter a. Everything between the opening and closing anchor tags is turned into a link. Links can connect to another page on the same Website, a different Website, a different place on the same page, or even begin composing an email in the user's default email program.
+
+The **href attribute** tells the browser where to navigate to when the link is clicked. Href stands for hypertext reference. It can be a URL or a file path. Attributes, written inside the opening tag of an HTML element, provide the browser with information about that specific element. An attribute is followed by an equals sign and the value assigned to the attribute is enclosed in quotes following the equals sign.
+
+The **target _blank attribute** causes the browser to open the page being linked to in a new tab rather than navigating away from the current page.
+
+```HTML
+<a href="https://github.com/pbrub" target="_blank"> Link goes here </a>
+```
+
+#### Semantic HTML
+
+Basically, semantic markup means that the meaning of the HTML being written should be self-evident from the way it is written. Semantic markup is important for a variety of reasons, such as search engine performance, accessibility, and code maintainability. This means using tags that make sense with the content that is being displayed.
+
+Some important semantic HTML tags are **header**, **main**, **footer**, and **section**, their meaning being fairly obvious.
+
+#### Sectioning Content With Article, Nav, and Aside.
+
+The article tag is used to separate content that stands on its own in some way, such as a blog entry, news article, or recipe. The `<nav></nav>` tag contains a list of navigation links, and is often found in the header or footer.
+
+The `<aside></aside>` tag is used for content that is loosely related to the main content of the page, but is not necessary to understand it. Visually, this content may be represented separately, such as in a sidebar. Keep in mind that semantic tags do not directly cause the browser to display the content within them in a different way, but they do change the way the pages content is interpreted by search engines and assistive technologies such as screen readers.
+
+#### Grouping Content With Main and Div
+
+The `<main></main>` tag identifies the area where the main content of the page will reside. Main should only be used once per page.
+
+The `<div></div>` tag is used for content that does not clearly fall under the umbrella of any more semantic tag.
+
+#### Adding and Captioning Images
+
+The `<image></image>` tag is used to add images to a page. The image tag needs a `src` attribute that points to the file path of the image. The `alt` attribute, while not needed to make the image tag work, should be included and provides a description of the image.
+
+To include a captioned image or group of images, wrap the `<img>` and `<figcaption>` tags within the `<figure></figure>` tag.
+
+#### Creating Breaks in Content
+
+To force a line break in HTML without creating another div, use the `<br>` empty element where you want the line break to be.
+
+To add a horizontal line separating content, use the `<hr>` empty element between the two elements you want to separate.
+
+Empty elements are sometimes written with a trailing slash to clearly indicate that they are self closing.
+
+It is important to remember that these elements are used to logically group content in HTML documents and CSS should be used instead if the intent is aesthetics.
+
+#### Add Meaning to Words With Text Level Elements
+
+The `<strong>` tag indicate a piece of text is especially important, and is typically displayed in bold by the browser. The `<small>` tag does the opposite. The `<em>` tag indicates there is extra emphasis on the text, and is displayed in italics by default.
+
+The `<span>` element is used like the div element, but for **inline** content rather than **block** content. This makes it an **inline element** rather than a **block level element**.
+
+#### Linking to Sections of a Webpage
+
+To link to one part of a Webpage from another, add an `id` attribute to the element to be linked to, and set the href attribute of the anchor element to the ID preceded by a hash symbol.
+
+`<div id="destination">content</div>`
+`<a href="filepath#destination">link</a>`
+
+#### Link to Email
+
+To create a link that opens the user's default email program with the to and from fields already filled out, use the following:
+
+`<a> href="mailto:emailaddress"link</a>`
+
+To add a subject to the subject field of the email, follow the email address with a question mark and then the subject parameter, an equals sign, and the subject to be displayed.
+
+`<a> href="mailto:emailaddress? subject=Hello!"link</a>`
+
+
+
+
+
+
 
 #### HTML Basics Outside Resources
 
@@ -447,7 +571,13 @@ Every HTML document must begin with a doctype declaration, so the browser knows 
 
 [2]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element
 
+* [HTML in Visual Studio Code][3]
 
+[3]: https://code.visualstudio.com/docs/languages/html
+
+* [What's in the Head? Metadata in HTML (MDN)][4]
+
+[4]: https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/The_head_metadata_in_HTML
 
 ---
 ---
