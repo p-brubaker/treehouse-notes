@@ -15,6 +15,12 @@
   * [Introduction to HTML and CSS](#introduction-to-html-and-css)
   * [HTML Basics](#html-basics)
   * [CSS Basics](#css-basics)
+  * [JavaScript Basics](#javascript-basics)
+  * [JavaScript Functions](#javascript-functions)
+  * [CSS Layouts](#css-layouts)
+  * [Mobile First CSS Layout](#mobile-first-css-layout)
+  * [CSS Flexbox](#css-flexbox)
+  * [HTML Forms](#html-forms)
 * [Miscellaneous CSS](#miscellaneous-css)
   * [CSS Transitions and Transforms](#css-transitions-and-transforms)
   * [Sass Basics](#sass-basics)
@@ -1004,6 +1010,12 @@ For example, the properties defined in the following media query only take effec
   }
 ```
 
+We can write multiple media queries to create **breakpoints**. The idea behind breakpoints is that the user will always be shown a layout that is optimal for their viewport size, eg. phone, tablet, small monitor or large monitor.
+
+We can also join multiple conditions within one media query with the `and` keyword to create a size range.
+
+Media queries can be made quite complex, but the most important thing is to differentiate between how your website will be displayed on desktop vs mobile devices.
+
 #### CSS Resources
 
 * [MDN Web Docs][6]
@@ -1038,8 +1050,571 @@ For example, the properties defined in the following media query only take effec
 
 [13]: https://www.fontsquirrel.com
 
+---
+
+### JavaScript Basics
+
+*contents*:
+* [Hello JavaScript](#hello-javascript)
+* [Intro to JavaScript Variables](#intro-to-javascript-variables)
+* [Intro to JavaScript Strings](#intro-to-javascript-strings)
+* [JavaScript Conditional Statements](#javascript-conditional-statements)
+* [Working With Numbers in JavaScript](#working-with-numbers-in-javascript)
 
 
+
+#### Hello JavaScript
+
+What makes JavaScript special is that it can run in the web browser, and is the de-facto language worldwide for adding advanced functionality and interactivity to web pages.
+
+We can experiment with JavaScript by using the **JavaScript console** in our web browser's developer tools.
+
+We signal the end of a line of code in JavaScript by typing a semicolon.
+
+Code blocks are enclosed within curly braces, and function arguments within parentheses.
+
+Whitespace is ignored JavaScript.
+
+To run some JavaScript on our web page, we enclose it in `<script></script>` tags. Script has a source attribute pointing to the location of the JavaScript file to be executed. The script tags should be placed just before the closing body tag, although the JavaScript will still run if it is placed elsewhere.
+
+#### Intro to JavaScript Variables
+
+The most common way to **declare** a **variable** in JavaScript is with the `var` **keyword**. Variables need not be **initialized** when we declare them. To **initialize** or **assign a value** to variable, we use the `=` operator.
+
+```JS
+var <variable name> = <variable value>
+```
+
+**Camel case** is the preferred style for multi-word variable names in JS.
+
+JavaScript allows the following shorthand for variable reassignment, called the **addition assignment operator**.
+
+```JS
+<variable name> = <variable name> + <value>
+
+is equivalent to
+
+<variable name> += <value>
+```
+
+The `const` keyword is used to declare **constants**, variables whose value may not be reassigned. Redeclaration of constants is also not allowed.
+
+The `let` keyword is used to declare a variable whose value can be reassigned, but does not allow redeclaration within the same code block.
+
+ There are differences in **scope** with each of these keywords that will be covered later.
+
+#### Intro to JavaScript Strings
+
+The **string** **data type** is written by enclosing characters within quote marks (single or double, single being preferred).
+
+It is common to enclose HTML code within quotes (causing the **JavaScript engine** to treat it as a string) in order to render HTML elements dynamically on a web page.
+
+It is acceptable to enclose a string in double quotes in order to avoid escaping single quotes within said string.
+
+The `\` character is used to escape characters within strings.
+
+**Multi-line strings** can be written by ending each line with a backslash to escape the implicit newline character.
+
+Strings in JavaScript are **objects** with built in **properties** and **methods**. Properties and methods are accessed with dot notation.
+
+Since methods are functions (stored as object properties) they are written with trailing empty parentheses, else the method itself is returned rather than the result of calling the method.
+
+The **prompt method** opens a dialogue box in the web browser and turns whatever the user types in it into a string.
+
+**String Concatenation** can be done with the `+` operator, or with the **concat** method:
+
+```JS
+'string1' += 'string2'
+
+or
+
+'string1'.concat('string2')
+
+both output
+
+'string1string2'
+```
+
+**Template literals** are a newer way to define strings in JavaScript using a pair of enclosing backticks.
+
+Template literals allow the insertion of JavaScript **expressions** directly in strings by writing a dollar sign character followed by curly braces enclosing the expression.
+The name literal comes from the fact that everything within the backticks is taken at face value unless it is identified as an expression by being enclosed within curly braces following a dollar sign.
+
+```JS
+ `Substring ${<expression>}`
+
+ is equivalent to
+
+'Substring ' + <expression>  
+```
+
+This is known as **string interpolation**.
+
+#### JavaScript Conditional Statements
+
+Conditional statements cause the program to take one of two or more branching paths based on the truth value of an expression.
+
+The `if` conditional is followed by a code block which is run if the condition is true and ignored if the condition is false.
+
+```JS
+if ( condition ) {
+  code here runs only when condition is true
+}
+```
+
+The **strict equality operator**, which checks if two values are exactly the same, is written `===` and is the most often encountered conditional operator. The '==' operator should generally not be used to check equality, as it is more lax and may result in unexpected behavior.
+
+The optional **else clause** consists of the keyword `else` followed by a code block that runs only when the `if` condition evaluates to false. Here is the syntax. Note that else is written on the same line as the closing curly brace of the if part of the conditional by convention.
+
+```JS
+if (condition) {
+  code here runs only when condition is true
+} else {
+  code here runs only when condition is false
+}
+```
+
+The preceding code is called an **if else** statement.
+
+We can also stack `else if` statements to create a cascade of conditionals:
+
+```JS
+if (condition) {
+  <code>
+} else if (condition) {
+  <code>
+} else {
+  <code>
+}
+```
+
+Keep in mind that an if else-if else conditional structured like this will have one and only one code block that runs (This is a desirable thing).
+
+Here is a list of JavaScript conditional operators:
+
+ `>`   Greater Than
+ `>=`  Greater Than or Equal To
+ `<`   Less Than
+ `<=`  Less Than or Equal To
+ `==`  Equal To
+ `===` Strict Equal To
+ `!=`  Not Equal To
+ `!==` Strict Not Equal To
+
+Boolean truth values in JavaScript are written `true` and `false`.
+
+Here is a list of JavaScript Boolean operators:
+
+`&&`  AND
+`||`  OR
+`!`   NOT
+
+JavaScript does not support NOR, NAND, XOR, or XNOR infix operators, so these logical operations need to be implemented with functions.
+
+Standard rules of Boolean algebra and order of operations apply as one would expect for expressions written with the AND, OR and NOT infix operators.
+
+#### Working With Numbers in JavaScript
+
+In JavaScript, all user input is treated by default as a string, so to use numbers entered by a user as such, we use the `parseInt` or `parseFloat` functions.
+
+JavaScript uses something called the math object for working with mathematical constants and functions like pi, cosine and pseudo-ransom numbers for example. The math object is built in and its methods and properties are static. THe syntax is as follows:
+
+`Math.property`
+
+for mathematical constants and
+
+`Math.method(args)`
+
+for mathematical functions.
+
+The `Math.random()` method returns a pseudo-random number between 0 and 1. Used in tandem with `Math.floor()`, or `Math.ceil()`, we can use this method to create (psuedo) random integers, zero inclusive or zero exclusive.
+
+---
+
+### JavaScript Functions
+
+*Contents:*
+
+* [JavaScript Functions Basics](#javascript-functions-basics)
+* [Variable Scope](#variable-scope)
+* [Function Expressions](#function-expressions)
+* [Arrow Function Expressions](#arrow-function-expressions)
+* [Default Function Parameters](#default-function-parameters)
+
+
+
+
+#### JavaScript Functions Basics
+
+Functions are said to be **First class citizens** in JavaScript, meaning they can be passed as arguments to other functions, returned by other functions as arguments, and assigned as a value to a variable.
+
+Functions are  written in camel case by convention and should have intuitive names.
+
+The basic syntax for a JavaScript function is:
+
+```JS
+function <name>(<parameters>) {
+  <code>
+}
+```
+
+Functions are called by typing their name, and a pair of trailing parentheses, empty if there are no arguments. Arguments are separated by commas, and are assigned to parameters in the order they are written. Arguments are accessed within a function by referencing their parameter name.
+
+To create a function with a return value:
+
+```JS
+function <name>(<parameters>) {
+  return <expression>;
+}
+```
+
+A function terminates as soon as it returns something.
+
+#### Variable Scope
+
+By default, parameters named in a JavaScript function's definition have scope local to that function.
+
+Values stored in a scope outside that of the function should be passed to the function as arguments in order to be used within that function. Accessing and modifying global variables within a function definition is allowed by JavaScript, but definitely not recommended.
+
+If a function is to be used to assign a value to a variable with scope outside that function, this should be done by assigning the return value of said function to the globally scoped variable in question.
+
+Using the `const` keyword to declare global variables whenever feasible is a good way to avoid inadvertently modifying the value of a global variable from within a function.
+
+It is safe to use the `let` or `const` keywords to declare variables local to a function, without worrying about another variable elsewhere having the same name.
+
+#### Function Expressions
+
+JavaScript allows the creation of **anonymous functions**, or **function expressions** by assigning a function to a variable. The syntax is:
+
+```JS
+const <name> = function(<parameters>) {
+  <code>
+};
+```
+
+Since functions expressions are statements, a semicolon follows the trailing curly brace. Functions assigned to a variable in this way are called with the variable name.
+
+The most important thing to remember about function declarations vs function expressions is that declared functions can be called anywhere in the program, while function expressions can only be called after they have been assigned. The term for this concept is **hoisting**.  Declarations are hoisted while expressions are not.
+
+#### Arrow Function Expressions
+
+Arrow functions are an abbreviated function expression syntax often used for **callback functions** such as in higher order array methods like map.
+
+Here is the syntax for arrow function expressions:
+
+```JS
+const <name> = (<parameters>) => {
+  <code>
+};
+```
+
+As with regular function expressions, don't forget about the semicolon after the closing curly brace. As function expressions, arrow functions are not hoisted.
+
+Arrow functions can be written as one-line statements with an implicit return value, and when written in this way curly braces are optional.
+
+```JS
+const <name> = <parameters> => <expression>;
+```
+
+When using an arrow function with no parameters, an empty set of parentheses goes where the parameters would normally be.
+
+```JS
+const <name> = () => {
+  <code>
+};
+```
+
+#### Default Function Parameters
+
+JavaScript allows us to make a function fall back on a default value in the case of an unsupplied parameter. To do this we simply add an equals sign followed by the default value after the parameter in question in the function declaration or expression.
+
+If an argument is supplied, the default parameter is replaced by that argument.
+
+When passing arguments to a function with multiple parameters, arguments will be assigned to parameters in the order they are supplied, so if we want to leave out an argument other than the last one, we can supply the argument `'undefined'` in its place.
+
+#### Descriptive Comments For Functions
+
+The standard syntax for documenting functions in JavaScript is called JSDoc:
+
+```JS
+/**
+ * [A short description of the myFunc function]
+ *
+ * @param {[param type]} param1 - [parameter description]
+ * @param {[param type]} param2 - [parameter description]
+ * @returns {[return type]} [documents the function's return value]
+ */
+```
+
+### CSS Layouts
+
+*Contents:*
+* [The Display Property](#the-display-property)
+* [Relative and Absolute Positioning](#relative-and-absoute-positioning)
+* [Fixed and Sticky Positioning](#fixed-and-sticky-positioning)
+* [Floated Elements](#floated-elements)
+* [The Z Index](#the-z-index)
+* [Media Queries](#media-queries)
+* [Additional Concepts](#additional-concepts)
+
+
+#### The Display Property
+
+The display property has four basic values, **none**, **inline**, **block** and **inline-block**.
+
+`display: none` makes an element invisible. This value is useful for toggling element visibility based on user interaction.
+
+`display-block` elements, also known as block level elements, are displayed one after the other vertically, taking up the entire width of their parent container and as much vertical space as they need by default.
+
+`display-inline` causes elements to display on the same line as other elements, taking up one line height vertically and as much space as needed horizontally by default. Inline elements wrap like text.
+
+`inline-block` elements display inline, but their width and height can be changed using CSS, unlike inline elements.
+
+#### Relative and Absolute Positioning
+
+There are five types of positioning in CSS,**static**, **relative**, **absolute**, **fixed** and **sticky**. Static is the default position value.
+
+Directional values can be used to position an element relatively to itself (where it would normally be positioned). Relative positioning may cause an unwanted scroll bar to appear in some cases. The directional values are listed separately like properties:
+
+```CSS
+selector {
+  positon: fixed;
+  top: 20px;
+  right: 20px;
+}
+```
+
+Absolute positioning removes an element from the normal document flow. By default, absolute positioning uses the edges of the viewport as a reference. This is because absolute positioning actually uses the closest positioned ancestor as its reference and the body element is a positioned element that takes up the entire viewport.
+
+#### Fixed and Sticky Positioning
+
+A fixed element is positioned relative to the viewport rather than its closest positioned ancestor. Fixed elements stay in place when the page is scrolled. Fixed content is also removed from the normal document flow.
+
+Sticky content maintains its position once the page is scrolled past that element, until the page is scrolled back past the element in the opposite direction.
+
+A rule for making an element stick to the top of the page when it is scrolled past would look like this:
+
+```CSS
+selector {
+  position: sticky;
+  top: 0px;
+}
+```
+
+#### Floated Elements
+
+The float property is used to remove elements from the normal document flow and place them on the right or left side of the page, while other content wraps around them.
+
+We can use the `clear` property to prevent content from wrapping around floated elements.
+
+#### The Z Index
+
+CSS' `z-index` property determines how elements stack on the imaginary axis facing into the page. Elements with a higher z-index are displayed on top of elements with a lower z-index. Elements with the same (or default) z-index are stacked according to normal document flow.
+
+#### Media Queries
+
+Media queries are CSS rules that are only applied when certain specified conditions are met. Those conditions are defined within the media query.
+
+Media queries most often target device width, but can be used for a wide variety of different types of media, such as print, low resolution devices, etc.
+
+The **meta viewport declaration** is used to let mobile browsers know your content is optimized for viewing on a mobile device. This prevents the mobile browser from automatically zooming out and making your content too small to be legible.
+```HTML
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
+
+#### Additional Concepts
+
+A **CSS reset** is a stylesheet used to override the default styles applied by different web browsers so that web pages will have a consistent look across all browsers.
+
+A **wrapper** is a container element used to hold our layout within certain boundaries and center it on the page. The wrapper is an element that will often be styled differently for different sizes of viewports. A wrapper can be made either by using the existing `body` tag or by creating a new div that wraps our page content.
+
+**Collapsing Margins** happen when two margins abut one another. The two margins collapse to the larger of the two values. Only vertical margins collapse, not horizontal ones.
+
+---
+
+### CSS Flexbox
+
+*Contents:*
+
+* [Flexbox Basics and Terminology](#flexbox-basics-and-terminology)
+* [Creating a Flex Container](#creating-a-flex-container)
+* [Controlling the Direction of Flex Items](#controlling-the-direction-of-flex-items)
+* [Wrapping Flex Items](#wrapping-flex-items)
+* [Distributing Space Inside a Flex Container](#distributing-space-inside-a-flex-container)
+* [Changing the Order of Flex Items](#changing-the-order-of-flex-items)
+* [Growing Flex Items](#growing-flex-items)
+* [Aligning Flex Items on the Cross Axis](#aligning-items-on-the-cross-axis)
+
+#### Flexbox Basics and Terminology
+
+CSS flexbox is a collection of CSS properties used to create responsive web pages. Flexbox allows one to change the direction, size, and order of HTML elements using CSS.
+
+The two most important elements in Flexbox are **flex containers** and **flex items**. The container sets the context for the flex items within it, that is, the flex properties applied to the flex container determine in what manner the flex items will be displayed.
+
+A flex container can be any inline or block level element. Any direct child of a flex container is automatically a flex item.
+
+By default, the x-axis of a flexbox container is the primary direction in which elements are laid out and is called the **main axis** while the y-axis is called the **cross axis**.
+
+#### Creating a Flex Container
+
+To create a flex container, we set the display property of an element to one of the Flexbox layout styles. By default, the flex children will be displayed one after each other in the order they are written in the HTML, taking up as much space as they require horizontally and stretching vertically to fill the height of the flex container. By default, the flex container is a block level element but we can make it an inline element if we so choose.
+
+The simplest block level flex container:
+
+```CSS
+selector {
+  display: flex;
+}
+```
+
+The simplest inline flex container:
+
+```CSS
+selector {
+  display: inline-flex;
+}
+```
+
+#### Controlling the Direction of Flex Items
+
+The **flex-direction** property determines the direction that flex items are laid out in the parent flex container. The default value for this property is `row` (think of a row in a matrix). To keep the items in a row but reverse their order, we can use the value `row-reverse`. Since this reverses the start and end positions of the main axis, by default this value will push the flex items to the right side of their parent container as well as reversing their order.
+
+As one might expect, to lay the flex items out vertically we use `flex-direction: column`. This switches the main axis with the cross axis, so now the flex items take up only as much space as they require vertically and expand to fill their parent container horizontally. `column-reverse`, of course, causes the items to display from the bottom of the container up, leaving any extra space above.
+
+#### Wrapping Flex Items
+
+By default, all items in a container will be displayed along one line called a **flex line**, and will not wrap even if the items overflow the container.
+
+To apply basic wrapping behavior to out flex container, we can use `flex-wrap: wrap`.
+
+#### Distributing Space Inside a Flex Container
+
+The `justify-content` property determines how space and alignment are distributed and controlled along the flex container's main axis. The default value for this property is `flex-start`. Some other useful values are `center`, `space-between`, and `space-around`.
+
+Giving a flex item a `margin: auto` property will cause it to push items around it to the edge of the flex container.
+
+#### Changing the Order of Flex Items
+
+Unlike the previous properties, the `order` property belongs to flex items rather than a flex container, and does not include the word "flex". Order overrides the order the items are written in the HTML, and the default value for the order property is zero. Items with higher order are displayed after items of lesser order along the main axis.
+
+#### Growing Flex Items
+
+The `flex-grow` property determines how flex items expand in relation to each other and the available space in their parent flex container. This property is applied to flex items individually. (Although in practice they are usually targeted in groups with a tag or class selector). Assigning a numeric value to the `flex-grow` property tells an item how much space to take up in relation to its sibling items (The values of two items together make a ratio). The grow property is applied separately and sequentially to separate flex lines. Remember that this ratio applies to the amount of extra available space each element will take up, not to the total resultant size of each element in relation to its siblings.
+
+The `flex-basis` property sets a bottom threshold size for flex items. After this size is taken up, remaining space is allocated by the `flex-grow` property. The `flex-basis` property is applied to items and takes a length unit.
+
+#### Aligning Flex Items on the Cross Axis
+
+The `align-items` property belongs to the flex container and dictates how children of that container will be aligned along the cross axis. The default value for this property is `stretch`, which means fill all the available space along the cross axis. Other values include `flex-start` and `flex-end`, and `center`.
+
+The `align-self` property decides the same behavior, but is applied to individual flex items.
+
+---
+
+### HTML Forms
+
+*Contents:*
+
+* [HTML Forms Basics](#html-forms-basics)
+* [The Input Element](#the-input-element)
+* [The Textarea Element](#the-textarea-element)
+* [The Button Element](#the-button-element)
+* [The Label Element](#the-label-element)
+* [Fieldsets and Legends](#fieldsets-and-legends)
+* [Select Menus](#select-menus)
+* [Radio Buttons](#radio-buttons)
+* [Checkboxes](#checkboxes)
+
+
+#### HTML Form Basics
+
+The `<from></form>` element is used to capture user input.
+
+Forms are normally used in combination with a server side language like python, ruby, etc. to send the data to a server for processing. Forms have **attributes** that determine what happens to the data that gets entered into them.
+
+The **action attribute** takes a URL as its value and tells the browser where to send the data entered into the form.
+
+The **method attribute** takes either **get** or **post** as its value and determines what happens with the data. Get Appends the form-data to the URL given by the action attribute as name/value pairs. Post sends the form-data as an HTTP post transaction.
+
+The resultant URL corresponding to the **get** method:
+
+`http://example.com?name=value`
+
+#### The Input Element
+
+The input tag is a self closing tag. It has **type**, **id**, and **name** attributes.
+
+The `type` attribute tells the browser what sort of information we are sending with the form, such as text, a telephone number or a password to name a few examples.
+
+The `id` attribute, while not mandatory, is a good thing to include. There is a good chance we will need to target our input element with CSS or JavaScript and the id attribute allows us to do so. It also allows associating labels to specific form controls.
+
+The `name` attribute provides vital information to the server so it can understand the form data and process the values sent.
+
+#### The Textarea Element
+
+This element takes text as its input data type automatically, so it doesn't need a type attribute like `<input>`. The entry field is formatted to accept multiple lines of text. In most browsers, the textarea element renders a draggable corner that the user can interact with to adjust the size of the input field. The `<textarea></textarea>` tag is not a self-closing tag like the input tag.
+
+#### The Button Element
+
+The `<button></button>` element is an HTML element provided for the user to signal the browser to do something with the information currently residing in the form's input fields, such as submit it or reset it. Button elements have a `type` attribute, the most common value for which is `submit`. Buttons do not have a default type, so be sure to specify one or the button won't do anything.
+
+#### The Label Element
+
+The `<label></label>` element provides some text that specifies to the user what data is supposed to be entered into an input field. The `for` attribute takes the input element's `id` attribute as a value and associates the label with that element. This means using labels properly is very important for accessibility.
+
+```HTML
+<label for="mail">Email:</label>
+<input type="email" id="mail" name="user_email">
+```
+
+When the user clicks on the label element, the page focuses on the corresponding input field.
+
+#### Fieldsets and Legends
+
+The `<fieldset></fieldset>` element is used to logically group HTML form elements. (The elements that are children of the form, not the form element itself) Fieldsets are labelled using the `<legend><legend>` element. The legend is placed within the fieldset tags as the first element. The reason for having a separate tag just to label the fieldset is semantic HTML.
+
+#### The Select Element
+
+To allow the user to pick from a list of predetermined options to submit, we use the `<select></select>` element. The select element should receive `id` and `name` attributes and have a corresponding label element that explains what the user is choosing. Within the select tags go the `<option></option` tags. The option tags need a `value` attribute to function properly. Whatever text may be nested in between the option tags is for the users benefit and will not be sent by the form. Here is an example:
+
+```HTML
+<select id="job" name="user_job">
+  <option value="frontend_developer">Front-End Developer</option>
+  <option value="php_developer">PHP Developer</option>
+  <option value="haskell_developer">Haskell Developer</option>
+  <option value="react_developer">React Developer</option>
+</select>
+```
+
+The `<optgroup></optgroup>` element can be used to organize options logically by placing them in between its opening and closing tags. The optgroup tag takes an attribute `label` the value of which will be displayed by the browser to the user.
+
+#### Radio Buttons
+
+Radio buttons work like the option element in that they allow the user to pick one option from a list, but instead of having to click a select element and then choose from a pop up list, all options are displayed up front and the user chooses by clicking a button next to the option they want.
+
+Radio button elements should have `for`, `id` and `name` attributes. The syntax for a radio button as an input is:
+
+```HTML
+<input type="radio" id="id" value="value" name="name">
+```
+
+ Writing the label for the radio button after the button itself may be helpful for the user, as this will display the button to the left of the text describing what the button selects, and this is more intuitive than having the button to the right. If the `name` attribute is the same for a group of radio buttons, the browser will only allow one of them to be selected at a time.
+
+#### Checkboxes
+
+Checkboxes are used when we have a  group of predefined options for the user to choose from, but we need the user to be able to select more than one of them. Here is an example checkbox group:
+
+```HTML
+<label>Interests</label>
+<input type="checkbox" id="development" value="interest_development" name="user_interest">
+<label class="light" for="development">Development</label><br>
+<input type="checkbox" id="design" value="interest_design" name="user_interest">
+<label class="light" for="design">Design</label><br>
+<input type="checkbox" id="business" value="interest_business" name="user_interest">
+<label class="light" for="business">Business</label><br>
+```
+
+Note that it the use of the checkbox attribute rather than the radio attribute that tells the browser to only allow one option to be selected at a time, not some difference in how we use the name and value attributes, this part of the syntax is identical for checkbox and radio buttons.
 
 
 
