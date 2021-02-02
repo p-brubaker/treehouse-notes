@@ -17,10 +17,20 @@
   * [CSS Basics](#css-basics)
   * [JavaScript Basics](#javascript-basics)
   * [JavaScript Functions](#javascript-functions)
+  * [JavaScript Loops](#javascript-loops)
+  * [JavaScript Arrays](#javascript-arrays)
+  * [JavaScript Objects](#javascript-objects)
+  * [JavaScript and the DOM](#javascript-and-the-dom)
+  * [Bootstrap 4 Basics](#bootstrap-4-basics)
+  * [AJAX Basics](#ajax-basics)
+  * [CSS Selectors](#css-selectors)
   * [CSS Layouts](#css-layouts)
   * [Mobile First CSS Layout](#mobile-first-css-layout)
   * [CSS Flexbox](#css-flexbox)
+  * [CSS Grid](#css-grid)
   * [HTML Forms](#html-forms)
+  * [HTML Tables](#html-tables)
+  * [Accessibility for Web Developers](#accessibility-for-web-developers)
 * [Miscellaneous CSS](#miscellaneous-css)
   * [CSS Transitions and Transforms](#css-transitions-and-transforms)
   * [Sass Basics](#sass-basics)
@@ -29,6 +39,7 @@
   * [Animating SVG with CSS](#animating-svg-with-css)
 * [Full Stack JavaScript Track](#full-stack-javascript-track)
 * [Learn React Track](#learn-react-track)
+  * [React Basics](#react-basics)
 * [Security](#security)
   * [OWASP Top 10 Vulnerabilities](#owasp-top-10-vulnerabilities)
   * [Introduction to Application Security](#introduction-to-application-security)
@@ -1346,6 +1357,673 @@ The standard syntax for documenting functions in JavaScript is called JSDoc:
  */
 ```
 
+### JavaScript Loops
+
+#### JS While Loop
+
+```JS
+while (<condition>) {
+  <code>
+}
+```
+
+The code in the block will run if the condition is true. After the code in the block runs, the condition will be checked again and the code will run again if it is still true, and so on ad infinitum until the condition returns false.
+
+While loops should not be used to repeat code a set number of times using a counter. This would require the declaration of a (very likely ambiguously named) global variable, a bad practice which is by avoided using a **for loop**.
+
+If it makes sense to do so, we can break a loop manually with the `break;` keyword. We should be careful using break statements as they have the tendency to create unpredictable code if used unwisely.
+
+#### JS Do While Loop
+
+The do while loop is like the while loop except for the fact that the code in the block always runs at least once, even if the condition is false. Note the inclusion of a semicolon at the end.
+
+```JS
+do {
+  <code>
+} while ( <condition> );
+```
+
+
+#### JS For Loop
+
+```
+for ( <initialization statement>; <condition statement>; <repeating statement>; ) {
+  <code>
+}
+```
+
+The first statement is technically optional and runs first (once only), the second statement is checked for truth before the code in the block runs, and the third statement runs after each time the code in the block runs.
+
+---
+
+### Javascript Arrays
+
+**Store and Access Multiple Values in an Array**
+
+In JavaScript, arrays are of flexible length and can hold multiple data types by default. JS arrays are objects with properties and methods.
+
+Basic array declaration syntax:
+
+```JS
+let <name>  = [ <comma separated values if not initializing empty> ]
+```
+
+To access an element of an array, use
+
+```
+<name of array>[<index of element>]
+```
+
+Array indices in JavaScript start at zero.
+
+**Add Elements to an Array**
+
+`Array.push(<args>)` adds an element(s) to the end of an array.
+
+`Array.unshift(<args>)` adds an element(s) to the start of an array.
+
+**Remove Elements From an Array**
+
+To remove and access the element at the end of an array, use
+`Array.pop()`
+
+To remove and access the element at the beginning of an array, use `Array.unshift()`
+
+**Copy and Combine Arrays with the Spread Operator**
+
+The spread operator is typed using three dots. `...<Array>`
+
+The spread operator expands the contents of one array, allowing them to be added to the contents of another array.
+
+The spread operator can also be used to pass the contents of an array as an argument to a function as if they were typed in a comma separated list.
+
+**Using a For Loop to Iterate Over the Elements in an Array**
+
+```JS
+for ( let i = 0; i < arr.length; i++) {
+  <do something with arr[i]>
+}
+```
+
+**Other Useful Array Methods**
+
+The `Array.join(<separator string>)` method returns a string with each element in the array separated by the string supplied in the argument. That is, every element other than the last one will be followed by the separator, then the next element.
+
+`Array.includes(<valueToFind>)` returns true if the value is an element in the array and false if not.
+
+`Array.indexOf(<searchItem>)` returns the index of the item provided as the argument to the method, and `-1` if the item is not found.
+
+---
+
+### JavaScript Objects
+
+**Object Basics**
+
+JavaScript is an object based programming language. Objects are constructs that have properties and methods that belong to them. Objects allow for the storage of data in **key:** **value** pairs, or **property: value** pairs.
+
+Objects are defined using what is called an **object literal**, specified in JavaScript by a pair of curly braces.
+
+```JS
+const <objectName> = {
+  <key>: <value>,
+  <key2>: <value2>
+};
+```
+
+Key names follow standard JS naming rules, and values can be any valid data type.
+
+**Access Object Properties**
+
+Data stored in objects is accessed using key names, unlike arrays where it is accessed using an index.
+
+```
+<objectName>['<keyName>']
+
+and
+
+<objectName>.<keyName>
+
+```
+
+are both valid syntaxed for accessing a value stored in an object.
+
+
+**Set the Value of Object Properties**
+
+To set the value of one of an object's properties, we use the following syntax:
+
+```
+<objectName.<propertyName> = <value>
+```
+
+We can add a new property using the same syntax, and also chain the dot syntax to access properties and methods, because objects can contain other objects as values.
+
+**Use For-In To Loop Through an Object's Properties**
+
+Bracket notation must be used with a for-in loop rather than dot notation to iterate over the values corresponding to an object's  properties. Here is the syntax:
+
+```
+for ( let <identifier> in <object name>) {
+  < do something with <object name>[<identifier>] >;
+}
+```
+
+With each iteration of the loop, the identifier specified is reassigned to point to the next property of the object, but remember that accessing a value is different from accessing a property, we must specify which one we want in the code within the body of the loop.
+
+**Useful JavaScript Object Methods**
+
+`Object.keys()` returns an array containing the property names (keys) of an object.
+
+`Object.values()` returns an array containing the given object's property values.
+
+The **spread operator** can be used to insert the properties of one object into another.
+
+Objects can be stored in an array without naming each object individually:
+
+```JS
+const <name> = [
+  { <property>: <value>},
+  { <property>: <value>},
+  { <property>: <value>}
+]
+```
+
+---
+
+### JavaScript and the DOM
+
+*Contents:*
+
+* [DOM Basic Information](#dom-basic-informnation)
+* [Selecting Elements](#selecting-elements)
+* [Modifying and Styling DOM Elements](#modifying-and-styling-dom-elements)
+* [Creating, Removing and Manipulating Elements](#creating-removing-and-manipulating-elements)
+* [Listening for and Responding to Events](#listening-for-and-responding-to-events)
+* [DOM Traversal](#dom-traversal)
+Browsers that can run JavaScript have a single global object called **window** which contains the entire JavaScript environment for that browser as its properties.
+
+The **document** object is used to select and control elements of the web page currently loaded in the browser.
+
+When CSS properties and values are invoked with document's methods, the dash syntax is replaced with camel case syntax and **class** is replaced by **className**, and CSS values are enclosed in quotes.
+
+The DOM (Document Object Model) is the abstract representation of a webpage used by JavaScript. The DOM represents the web page's structure as a single object named document.
+
+The three basic types of tasks JavaScript performs with the DOM are:
+
+* Select elements
+* Read or change elements
+* Listen for and respond to user events
+
+#### Selecting Elements
+
+One way to select an element with JavaScript is with
+
+```JS
+document.getElementById('<id>')
+```
+
+This method on the document object returns a reference to the corresponding object in the DOM that represents the HTML element in question. Note that it would not be accurate to say that the element itself is returned by this method, there is a subtle but important difference.
+
+To add an event listener to a selected element, we use
+
+```
+<HTMLElement>.addEventListener('<event>', <action>)
+```
+
+Some other ways to select elements are:
+
+* `getElementsByTagName()`
+  (Which returns an HTMLCollection object)  
+* `getElementsByClassName()`
+  (Also returns a collection)
+* `querySelector()`
+* `querySelectorAll()`
+
+Query selector only returns the first matching element found by the browser while querySelectorAll returns all matching instances. These two methods will take any valid CSS selector or HTML attribute as an argument. To use an HTML attribute as the argument, the syntax is:
+
+`[attribute=value]`
+
+#### Modifying and Styling Elements
+
+An HTML element's content can be accessed with the following methods:
+
+```
+<HTMLElement>.textContent()
+```
+
+and
+
+```
+<HTMLElement.innerHTML()
+```
+
+The `textContent` property can be assigned to a string value, which replaces its current value with said string. The `innerHTML` property can be assigned to any valid HTML code snippet and any HTML inside that element's opening and closing tags will be replaced.
+
+We can also access and change the values of attributes of DOM elements with
+
+```
+<HTMLElement>.<attribute name>
+```
+
+If we want to access the class attribute, we need to use `className` because `class` is a reserved keyword in JavaScript.
+
+Inline styles can be set on DOM elements by accessing their `style` property, which is itself an object with methods.
+
+It is common to use the style property when using JavaScript to show or hide elements on the page.
+
+#### Creating, Removing and Manipulating Elements
+
+We can use the document object's createElement() method to insert new elements into our web page. This method takes any valid tag name as an argument.
+
+After creating our element, we can add it to the DOM using `Node.appendChild`. This method takes a DOMNode as an argument. This tells the browser where to place the new node in relation to other nodes.
+
+To remove a node, we use `Node.removeChild(childElement)`.
+
+#### Listening for and Responding to Events
+
+There are many events recognized by the browsers JavaScript environment, and most of them involve user interaction.
+
+We add event listeners to objects with
+
+`EventTarget.addEventListener(type, listener[, options])`
+
+Where `EventTarget` is any valid target for events, `type` is a string representing the event type, and listener is an object implementing `the Event.listener` interface, typically a callback function. The callback function is often called an **event handler** when used in this way.
+
+Events propagate up the DOM tree until they reach the root element. This behavior is useful because we can set a single event handler on a parent element rather than a separate event handler for many of its children.
+
+When an event handler is called, it receives an **event object** containing information about the event as its first argument. This allows us to have the event handler do something based on which of the event target elements ancestors triggered the event. The **target** property is a reference to the element that first triggered the event. We must add the **event** parameter as the first argument in the callback function if we wish to make use of its properties. It is acceptable to use the abbreviation **e** in place of **event**.
+
+If we are reading a descendant element's **tagName** property in order to make a decision within the body of our callback function, it is important to remember that the string returned will be in all caps.
+
+#### DOM Traversal
+
+We can obtain a reference to a selected DOM node's parent node with the `Element.parentNode` property.
+
+Non-Document type child nodes have the property `previousElementSibling` which selects the sibling element immediately before that element and returns null if it is the first sibling. The `previousSibling` property returns the nearest previous sibling DOM node, which is not necessarily an element.
+
+The `Node.insertBefore` method belongs to a parent node, and takes a node to be inserted as its first argument, and a reference node as its second argument. If the node to be inserted already exists in the DOM, it will be moved.
+
+The `ParentNode.children` property returns a collection of all of that node's children elements.
+
+To get the first or last child of a parent element, we use
+
+`ParentNode.firstElementChild`
+
+and
+
+`ParentNode.lastElementChild`
+
+---
+
+### Bootstrap 4 Basics
+
+*Contents:*
+
+* [Introducing Bootstrap](#introducing-bootstrap)
+
+
+
+
+
+
+#### Introducing Bootstrap
+
+Bootstrap is a front end framework used for rapid development. Bootstrap supplies a variety of ready-made components with pre-written HTML and CSS, making development easier. Bootstrap also includes JavaScript plugins for adding interactivity to our sites.
+
+Bootstrap is mobile-first and has full cross-browser support, solving many layout, typography and compatibility problems automatically.
+
+---
+
+### Ajax Basics
+
+*Contents:*
+
+* [AJAX Basic Information](#ajax-basic-information)
+* [Basic AJAX Implementation](#basic-ajax-implementation)
+* [Query Strings and Response Formats](#query-strings-and-response-formats)
+* [Security Limitations of AJAX](#security-limitations-of-ajax)
+* [Using JSON with AJAX](#using-json-with-ajax)
+
+AJAX is an acronym for Asynchronous JavaScript and XML. What AJAX does, is update HTML without loading a new webpage. AJAX can make our pages faster because only the specific data that is needed is requested from the server, which in many cases is much less than the data it takes to reload the entire page. Technically, AJAX is really called **XMLHttpRequest Object**, or XHR. Originally, XML (extensible markup language) was the form that AJAX responses were sent in, but now this is not usually the case.
+
+Browsers, called **clients**, make requests to **servers**, which then send back a **response**. The term AJAX has come to denote a methodology of using several pre-existing technologies to facilitate this process in an efficient, asynchronous way. (Meaning data requests and responses are decoupled from page display, one does not wait for the other). This allows wepages to behave much more dynamically than they would otherwise be able to.
+
+#### Basic Ajax Implementation
+
+AJAX works in a four step process:
+
+1. Create an XMLHttpRequest Object.
+2. Create a callback function.
+3. Open a request.
+4. Send the request.
+
+The first step, repeated for each new request, looks like this:
+
+```
+var <name> = new XMLHttpRequest();
+```
+
+The second step defines what the browser does with the information it receives back from the server. It is important to know that if there is more than one of these callback functions due to more than one request, there is no way to know what order they will be called in. The callback function is triggered by an event. The `onreadystatechange` event happens whenever there is a change in the state of the AJAX request. A **ready state of 4** indicates that a response has been received back from the server.
+```
+<name of XMLHttpRequest Object>.onreadystatechange = function () {
+    if (<name of XMLHttpRequest Object>.readyState === 4) {
+      <do something with XMLHttpRequestObject.property>
+    }
+}
+```
+
+Step 3 uses the XHR Object's `open` method. This method takes two arguments, the first being the HTTP method that is being used, such as `GET` or `POST`, and the second being the url where the request is being sent.
+
+```
+<name of XMLHttpRequest Object>.open('<HTML method>', 'url' )
+```
+
+The fourth step is simple:
+
+```
+<name of XMLHttpRequest Object>.send(<data if posting>);
+```
+
+#### Query Strings and Response Formats
+
+Query strings are appended to a url following a question mark:
+
+```
+http://website.com/employees.php?key=value
+```
+
+The query string describes what specific piece(s) of information is being requested from the server by the browser. Multiple key-value pairs are separated by an ampersand.
+
+The ampersand, space, plus and quote marks are all reserved characters in query strings.
+
+When using the `GET` method, all of the information being sent with the request is sent in the url, making it a less than ideal choice for sending sensitive information. That information will be saved in the computer's browser history and the web servers log files.
+
+The `POST` method sends data separately from the url, in the body of the request. Meta-information about the information being sent with the `POST` request is included in a specially formatted header.
+
+For some simple requests, a server will send back a short response in plain text. For more complex responses, it is standard to use a data interchange format such as XML or JSON (JSON being the most popular currently).
+
+#### Security Limitations of AJAX
+
+In general, using JavaScript to exchange information between websites and servers is not permitted if the two websites are not hosted by the same server, or if the server the information is being requested from is not the host server. These kind of requests are called **cross-origin** requests, and the rules governing them are determined by a browser's **same-origin policy**.
+
+Switching between HTTP and HTTPS is also not allowed, and neither is switching port numbers.
+
+Some ways around this are to invoke a web proxy, or use **JSONP**, which stands for **JSON with Padding** (Which is commonly used to access information such as JQuery libraries or Google fonts). A newer way is called CORS or Cross-Origin Resource Sharing. CORS is recommended by the W3C and allows a server to accept requests from other domains under certain circumstances, including accepting special secure requests that require the requesting browser to supply credentials.
+
+#### Using JSON With AJAX
+
+JSON notation must be written as an array of items, or an object made up of key-value pairs, or a combination of the two. Unlike regular JavaScript object keys, keys in JSON must be enclosed in double quotes. JSON also requires double quotes for string values. A JSON validator can be used to check if a file is formatted with valid JSON.
+
+The browser itself interprets data it receives back from the server as a plain text file, a long string. On the front end, we parse that string and convert it to JavaScript using the `JSON.parse` method:
+
+```
+JSON.parse(<XMLHttpRequestObject>.responseText)
+```
+
+The JSON parse method always returns a JavaScript object when supplied with valid JSON. At this point, the data is in a form where it can be easily inserted into markup using JavaScript.
+
+---
+
+### Asynchronous Programming With JavaScript
+
+* [Asynchronous JavaScript Basics](#asynchronous-javascript-basics)
+* [JavaScript Promises](#javascript-promises)
+
+
+#### Asynchronous JavaScript Basics
+
+JavaScript is a synchronous, single threaded language, meaning it can process only one request at a time. Because of this, asynchronous operations (operations which may need to wait for some event to happen or resource to become available) are handled separately from normal operations in JavaScript.
+
+**Blocking behavior** refers to code that forces the browser to wait for it to finish executing before anything else can happen in the browser. Blocking behavior is, in general, undesirable.
+
+One of the simplest examples of special JavaScript methods for implementing asynchronous operations is the `setTimeout` method, which takes a callback function and a number of milliseconds as arguments. When called, it executes the callback function after the time delay has expired.
+
+Asynchronous behavior in JavaScript does not come from the JavaScript engine, but rather is handled by various APIs provided by the JavaScript runtime environment. In the browser, some examples of web APIs that handle these kind of operations are setTimeout(), XMLHttpRequest, Fetch API, and the DOM event API.
+
+Asynchronous JavaScript code is run by the the **call stack**, **Web APIs**, and the **callback queue** working together. The call stack consists of a stack of frames, where each frame has its own namespace for arguments and local variables. When a function is called within a function, the latest function called goes to the top of the stack and gets its own frame. Frames at the top of the stack are executed first. When the call stack encounters an asynchronous operation, it is handed off to a web API to be processed. If a callback function is part of the operation handed off to the web API, the API pushes that function onto the callback queue when it is ready to be executed, where it waits for the **event loop** to push it onto the call stack.
+
+#### JavaScript Promises
+
+JavaScript promises are created with the **promise constructor function**.
+
+> The `Promise` object represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
+-MDN
+>
+
+The promise constructor function takes one argument, a callback with the two parameters `resolve` and `reject`. These parameters are themselves functions, whose parameters are the values to be returned upon resolution or rejection.
+
+The promise API has methods that can be called on a promise object, the two most common of which are `then()` and `catch()`.
+
+The `then` method takes two functions as parameters, one for fulfilled promises, and the second optional one for rejected promises. The `catch` method can be chained to the `then` method to handle rejected promises.
+
+---
+
+### Object Oriented JavaScript
+
+*Contents:*
+
+* [Object Oriented JS Basics](#object-oriented-js-basics)
+* [JS Classes](#js-classes)
+
+
+
+#### Object Oriented JS Basics
+
+The quickest and simplest way to create our own custom object with JavaScript is to declare an **object literal**.
+
+```
+let <object name> = {
+  <property name>: <value>,
+  <method name>: <function>
+};
+```
+
+Object properties and methods are accessed with dot notation or bracket notation.
+
+Dot notation:
+
+```
+Object.<property name>
+```
+
+Bracket notation:
+
+```
+Object['<property name>']
+```
+
+The `this` keyword is bound to the name of the object within the scope of methods owned by that object.
+
+#### JS Classes
+
+When we declare a class, we define a constructor method belonging to that class that will be called to create new instances of that class. The `this` keyword is used in the constructor method rather than the object name. The object name refers to the class itself rather than the instances of the class that will be created with the constructor method. The syntax for instantiating a new instance of a class is:
+
+```
+let <name of instance> = new <Name of class>(<parameters>)
+```
+
+Getters and setters are the methods that allow the creation, retrieval, and updating of an object's properties.
+
+The getter method allows the retrieval of properties that have dynamic values. The value is computed by the getter method and passed along, but not stored as the property's value. Getter methods are defined inside the class declaration with the following syntax:
+
+```
+get <method name>(args) {
+  <code>
+}
+```
+
+A setter method receives a value and can perform logic on that value if necessary.
+
+
+
+
+
+
+
+---
+
+### CSS Selectors
+
+*Contents:*
+
+* [Attribute Selectors](#attribute-selectors)
+* [Combinators](#combinators)
+* [CSS Pseudo Classes](#css-pseudo-classes)
+* [Substring Matching Attribute Selectors](#substring-matching-attribute-selectors)
+* [Element States Pseudo Classes](#element-states-pseudo-classes)
+* [Pseudo Class Examples](#pseudo-class-examples)
+* [Pseudo Elements](#pseudo-elements)
+
+
+#### Attribute Selectors
+
+Selecting elements based purely on whether they have a certain attribute may not find many use cases, but if for some reason we want to do that, here is how:
+
+```CSS
+[<attribute>] {
+  <property>: <value>;
+}
+```
+
+To add a value, as will most likely be necessary, we use a similar syntax to that in the HTML:
+
+```CSS
+[<attribute>="<value>"] {
+  <property>: <value>;
+}
+```
+
+We can add a tag name before the opening bracket with no space to target only elements of that type which have the specified attribute and value.
+
+Attribute selectors are often helpful for styling form elements.
+
+
+#### Combinators
+
+Combinators target elements based on the relationship between said elements in the HTML code.
+
+The `>` sign is called the **child combinator because it targets elements that are direct children of the specified element.
+
+The following rule targets the child element:
+
+```CSS
+parent > child {
+  property: value;
+}
+```
+The `+` sign combinator targets only elements that are adjacent siblings of the specified element.
+
+```CSS
+element + sibling {
+  property: value;
+}
+```
+
+An element's adjacent sibling is considered the element that follows, not precedes, that element.
+
+The `~` is called the general sibling combinator and targets all sibling elements that follow.
+
+#### CSS Pseudo Classes
+
+Structural pseudo-elements target elements based on their position on the page and relation to other elements. The element to be targeted is typed followed by a semicolon and then the pseudo-class, with no spaces.
+
+An example of a structural pseudo class is the **first-child** pseudo class:
+
+```CSS
+element:first-child {
+  property: value
+}
+```
+
+The **first-child** targets only elements that are the first child of another element. The **last-child** pseudo class of course does something similar but targets last child rather than first. These particular pseudo-elements are useful for adding some slick styling to lists and navs.
+
+There are many other useful pseudo-classes. Two more that are covered in the Treehouse tutorial are `:only-child` and `:empty`.
+
+#### Substring Matching Attribute Selectors
+
+Substring matching attribute selectors allow targeting elements based on a specific piece of an attribute's value (regex style).
+
+The **begins-with** selector uses a caret:
+
+```CSS
+element[attribute^="substring"] {
+  property: value;
+}
+```
+
+The **ends-with** selector uses a dollar sign:
+
+```CSS
+element[attribute$="substring"] {
+  property: value;
+}
+```
+
+The **contains** selector uses an asterisk.
+
+```CSS
+element[attribute*="substring"] {
+  property: value;
+}
+```
+
+#### Element States Pseudo Classes
+
+Element states pseudo classes target elements based on the user's interaction with them.
+
+The basic syntax is:
+
+```CSS
+element:state {
+  property: value;
+}
+```
+
+Like with other pseudo classes, an element need not be provided, if we wish to target all elements in that state. Here is an example of combining an attribute selector with a combinator and an element state pseudo class:
+
+#### Pseudo Class Examples
+
+
+The **:nth-child** pseudo class targets elements based on any position within their parent element in relation to their siblings (if any). The argument can be any valid expression, such as **odd**, **even** an integer, or a formula `an+b`, for example.
+
+```CSS
+element:nth-child(argument) {
+  property: value;
+}
+```
+
+The **:nth-of-type** pseudo class targets child elements like **:nth-of** does, but only if they are of a given type.
+
+The **:root** pseudo class selects the element that is the root, that is the highest level element in the document.
+
+The **:target** pseudo class selects an element that is the target of a link.
+
+The **:not()** pseudo class is used for negation and targets all elements which do not match the expression given as the argument.
+
+#### Pseudo Elements
+
+Pseudo Elements can style certain parts of an element like just the first line of text or the first letter in a paragraph, for example. They can also be used to insert elements and content into the page without making changes to the **document object model** (DOM).
+
+Pseudo elements can be denoted with one or two semicolons, but two is preferable to distinguish them from pseudo classes.
+
+The **::before** and **:after** pseudo elements are used to insert content (virtual elements) immediately before or after a specified element. This kind of content is called **generated content**. The **content property** is always used with these pseudo classes to specify what content should be inserted. Any further properties and values added to the rule are applied as styles to the content.
+
+```CSS
+element::before {
+  content: <content to be inserted>;
+  property: value;
+}
+```
+
+The before and after elements can also be used to insert the value corresponding to one of an elements properties by supplying the CSS function **attr()** as the value of the content property. The name of the respective attribute is supplied as the argument to the function.
+
+In actuality, the generated content is created as child content of the targeted element, so it will lie within that element's borders and inherit styles from it.
+
+
+
+
+---
+
 ### CSS Layouts
 
 *Contents:*
@@ -1511,6 +2189,16 @@ The `align-self` property decides the same behavior, but is applied to individua
 
 ---
 
+### CSS Grid
+
+
+
+
+
+
+
+---
+
 ### HTML Forms
 
 *Contents:*
@@ -1616,6 +2304,165 @@ Checkboxes are used when we have a  group of predefined options for the user to 
 
 Note that it the use of the checkbox attribute rather than the radio attribute that tells the browser to only allow one option to be selected at a time, not some difference in how we use the name and value attributes, this part of the syntax is identical for checkbox and radio buttons.
 
+---
+
+### HTML Tables
+
+HTML tables display information in tabular form (rows and columns). Table rows are declared explicitly with tags, while table columns are implied from the number of children the rows have. The table tag is `<table></table>` and the table row tag is `<tr></tr>`. Table cells have the `<td>` tag.
+
+The table header cell element, `<th></th>` tells the browser, search engine crawlers, and screen readers that this cell contains the label that the information in the following row or column is associated with. The `scope` attribute defines whether the table header cell element is labeling its row, column, remainder of its row or remainder of its column.
+
+The `<thead>` element is used for semantic purposes and wraps the table header information, typically the leading row. The `<tbody>` element, also a semantic element, wraps the remaining rows.
+
+The table footer element, `<tfoot></tfoot>`, is placed between the table head and table body tags in the HTML. The table footer is optional and typically includes aggregate or meta information.
+
+The `<caption></caption` element gives the table a title that tells browsers, search engines, etc. what information the table is meant to display. It is placed immediately after the opening `<table>` tag.
+
+
+
+
+
+---
+
+### Accessibility for Web Developers
+
+*Contents:*
+
+* [What is Accessibility](#what-is-accessibility)
+* [Web Content Accessibility Guidelines](#web-content-accessibility-guidelines)
+* [Form Accessibility](#form-accessibility)
+
+Accessibility is important because there are many people who use the web and are disabled. It is important to provide these people with the best experience possible.
+
+Making our websites accessible has other benefits too, like improving user experience for all users in ways that may not at first be obvious, ensuring our sites are legally compliant, and boosting search rankings. Accessible websites work with assistive technologies to ensure that disabled users are able to access the information on the site.
+
+Some common assistive technologies:
+
+* Screen Reader
+* Screen Magnifiers
+* Switch Controls
+* Closed Captioning
+
+The Americans With Disabilities Act, Title 3
+
+* Websites and apps are "places of public accommodation"
+* Prevents discrimination against people with disabilities
+
+#### Web Content Accessibility Guidelines
+
+The Web Content Accessibility Guidelines are the internationally recognized standard for web accessibility, although laws vary from country to country.
+
+The WCAG Four Principles of Accessibility
+
+* Perceivable
+* Operable
+* Understandable
+* Robust
+
+Within these four principles are 13 accessibility guidelines. Here is resource that summarizes them:
+
+[13 Days of Accessibility](http://a11ycalendar.kaseybon.com/)
+
+The WCAG has three levels of compliance, **A**, **AA**, and **AAA**, with **AAA** being optional as it may not always be feasible to achieve.
+
+**WCAG Perceivable Principle**
+
+* Text alternatives
+* Captions and transcripts
+* Present content using semantic html
+* Portrait and landscape orientation
+* Sufficient color contrast
+* Combine multiple visual cues, not just color
+* Avoid autostarting audio or video
+* Responsive body copy
+* Legible at 200% zoom
+
+**WCAG Operable Principle**
+
+* Keyboard navigation
+* Focus indicators
+* Allow enough time
+* Disable distracting content
+* Careful with flashing animations
+* Help users navigate
+* Titles
+* Make link purpose clear
+* Semantic heading structure
+* Provide alternatives to complex interactions
+* Generous target sizes
+
+**WCAG Understandable Principle**
+
+* Set HTML language attribute
+* Use plain language
+* Create predictable navigation
+* No unexpected changes in context
+* Make errors easy to spot and correct
+
+**WCAG Robust Principle**
+
+* Write valid HTML
+* Use Semantic Markup
+* Changes in content status
+
+#### Form Accessibility
+
+**Form accessibility principles**
+
+* Avoid unnecessary questions
+* Minimize Questions per screen
+* Provide context clues
+* Group related questions
+* Use clear input labels
+* Make focus indicators obvious
+* Help users spot and correct errors
+
+Example of an accessible form:
+
+```HTML
+<form>
+  <fieldset>
+    <legend>Delivery Information</legend>
+    <p class="hint">* - required field</p>
+    <label for="name">Your Name *</label>
+    <input type="text" id="name" name="user-name">
+    <label for="email">Email Address *</label>
+    <input type="email" name="user-email">
+    <p class="hint">Receipt will be sent to this address.</p>
+    <label for="address1">Street Address *</label>
+    <input type="text" id="address1" name="user-address1">
+    <label for="address2">Apartment/Office Number</label>
+    <input type="text" id="address2" name="user-address2">
+    <label for="zip">Zip Code *</label>
+    <input type="text" id="zip" name="user-zip">
+    <p class="hint">City and state will be looked up from Zip Code.</p>
+    <label for="phone">Phone</label>
+    <input type="text" id="phone" name="user-phone">
+    <p class="hint">No phone? Include alternate contact below.</p>
+    <textarea id="delivery-instructions"
+    name="user-delivery-instructions"></textarea>
+    <button type="submit">Continue to Billing</button>
+  </fieldset>
+</form>
+```
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ---
@@ -1632,6 +2479,27 @@ Note that it the use of the checkbox attribute rather than the radio attribute t
 ---
 
 ## Learn React Track
+
+### React Basics
+
+*Contents:*
+
+* [React Fundamentals](#react-Fundamentals)
+
+
+
+#### React Fundamentals
+
+React is a component based JavaScript library for building user interfaces. All react actually does is create and update HTML elements for the UI. This is done using a syntax called JSX.
+
+
+
+
+
+
+
+
+
 
 ---
 ---
